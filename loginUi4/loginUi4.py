@@ -1,9 +1,6 @@
-######################################################
-##  SihinaCode > Search YouTube for more tutorials  ##
-######################################################
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys, res
+import subprocess
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -147,9 +144,8 @@ class Ui_Form(object):
         self.pushButton.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=25, xOffset=3, yOffset=3, color=QtGui.QColor(105, 118, 132, 100)))
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-        #pix = QtGui.QPixmap(self.widget.size())
-        #self.widget.render(pix)
-        #pix.save("save.png")
+        # Connect the login button click event to a function
+        self.pushButton.clicked.connect(self.run_script)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -163,6 +159,13 @@ class Ui_Form(object):
         self.pushButton_3.setText(_translate("Form", "D"))
         self.pushButton_4.setText(_translate("Form", "M"))
         self.pushButton_5.setText(_translate("Form", "C"))
+
+    def run_script(self):
+        try:
+            # Replace 'path_to_your_script.py' with the actual path to your Python script
+            subprocess.Popen(['python', 'loader.py'])
+        except Exception as e:
+            print("Error executing subprocess:", e)
 
 if __name__ == "__main__":
         app = QtWidgets.QApplication(sys.argv)
